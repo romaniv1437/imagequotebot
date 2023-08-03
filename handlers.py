@@ -1,22 +1,16 @@
 import textwrap
-
-from script import bot, dp
-from aiogram import types
-from config import admin_id, botToken
-import asyncio
-import logging
-from aiogram import Bot, types
-from aiogram.utils import executor
-from aiogram.dispatcher import Dispatcher
-from aiogram.types.message import ContentType
-from aiogram.utils.markdown import text, bold, italic, code, pre
-from aiogram.types import InputFile
-from aiogram.types import ParseMode, InputMediaPhoto, InputMediaVideo, ChatActions
-from filter import IsGroup
-from PIL import Image, ImageDraw, ImageFilter, ImageFont
-import requests
 from io import BytesIO
+
+import requests
+from PIL import Image, ImageDraw, ImageFilter, ImageFont, ImageEnhance
+from aiogram import types
+from aiogram.types import InputFile
+from aiogram.utils.markdown import text, bold
 from pilmoji import Pilmoji
+
+from config import admin_id, botToken
+from filter import IsGroup
+from script import bot, dp
 
 
 async def send_to_admin(*args):
@@ -59,41 +53,48 @@ async def send_picture(message: types.Message):
 def create_quote_photo(file, username, quote, date):
     response = requests.get('https://random.imagecdn.app/500/300')
 
-    profilePicture = Image.open(file)
-    baseImage = Image.open(BytesIO(response.content))
+    # open images
+    profile_picture = Image.open(file)
+    base_image = Image.open(BytesIO(response.content)).filter(ImageFilter.GaussianBlur(5))
 
-    mask_size = profilePicture.size
+    # reduce brightness
+    enhancer = ImageEnhance.Brightness(base_image)
+    base_image = enhancer.enhance(0.6)
+
+    # draw profile picture mask
+    mask_size = profile_picture.size
     circle_shape = [(40, 40), (150 - 10, 150 - 10)]
 
     mask_image = Image.new('L', mask_size, 0)
     mask_draw = ImageDraw.Draw(mask_image)
     mask_draw.ellipse(circle_shape, fill=255)
 
-    baseImage.paste(profilePicture, (0, 0), mask_image)
+    base_image.paste(profile_picture, (0, 0), mask_image)
+
+    # draw text elements
+    base_image_text_emoji = Pilmoji(base_image)
 
     font_request = requests.get("https://github.com/googlefonts/roboto/blob/main/src/hinted/Roboto-Black.ttf?raw=true",
                                 allow_redirects=True)
     font = ImageFont.truetype(BytesIO(font_request.content), size=20)
 
-    quote_lines = textwrap.wrap(quote, width=30)
+    base_image_text_emoji.text((15, 150), username, fill="white", font=font)  # username
+    base_image_text_emoji.text((40, 180), str(date), fill="white", font=font)  # date
 
+    # draw quote
+    quote_lines = textwrap.wrap(quote, width=30)
     offset = 50
 
-    base_image_draw = Pilmoji(baseImage)
-
-    base_image_draw.text((40, 150), username, fill="white", font=font)
-    base_image_draw.text((40, 180), str(date), fill="white", font=font)
-
     for line in quote_lines:
-        base_image_draw.text((200, offset), line, font=font, fill="white")
-        offset += 20
+        base_image_text_emoji.text((180, offset), line, font=font, fill="white")
+        offset += 25
 
-    baseImage.save('assets/image.jpg', quality=100)
-    return baseImage
+    base_image.save('assets/image.jpg', quality=100)
+    return base_image
 
 
 def get_profile_picture(file_path):
     response = requests.get('https://api.telegram.org/file/bot' + botToken + '/' + file_path)
-    byteFile = BytesIO(response.content)
+    byte_file = BytesIO(response.content)
 
-    return byteFile;
+    return byte_file
