@@ -72,7 +72,7 @@ def create_quote_photo(file, username, quote, date):
                                 allow_redirects=True)
     font = ImageFont.truetype(BytesIO(font_request.content), size=20)
 
-    base_image_text_emoji.text((15, 150), username, fill="white", font=font)  # username
+    base_image_text_emoji.text((30, 150), username, fill="white", font=font)  # username
     base_image_text_emoji.text((40, 180), str(date), fill="white", font=font)  # date
 
     # draw quote
