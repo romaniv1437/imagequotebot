@@ -34,18 +34,16 @@ async def echo_message(message: types.Message):
 
 
 async def send_picture(message: types.Message):
-    if (message.reply_to_message):
+    if message.reply_to_message:
         profile_pictures = await bot.get_user_profile_photos(message.reply_to_message.from_user.id)
         if len(profile_pictures.photos[0]) > 0:
             file = await bot.get_file(profile_pictures.photos[0][0].file_id)
             byte_file = get_profile_picture(file.file_path)
-            quote_image = create_quote_photo(byte_file, "©" + message.reply_to_message.from_user.username,
-                                             message.reply_to_message.text,
-                                             str(message.reply_to_message.date).split()[0])
+            create_quote_photo(byte_file, "©" + message.reply_to_message.from_user.username,
+                               message.reply_to_message.text,
+                               str(message.reply_to_message.date).split()[0])
             photo = InputFile("assets/image.jpg")
             await bot.send_photo(chat_id=message.chat.id, photo=photo)
-        else:
-            print('Немає фото')
     else:
         await message.reply('Я сам маю придумати цитату?')
 
