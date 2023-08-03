@@ -3,3 +3,12 @@
 ./lib
 ./Scripts
 ./pyvenv.cfg
+/Scripts/
+/Lib/
+/config.py
+/pyvenv.cfg
+/.idea/imagequotebot.iml
+/.idea/misc.xml
+/.idea/modules.xml
+/.idea/inspectionProfiles/profiles_settings.xml
+/.idea/vcs.xml
