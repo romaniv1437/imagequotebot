@@ -29,10 +29,6 @@ async def process_help_command(message: types.Message):
     await message.reply(msg)
 
 
-async def echo_message(message: types.Message):
-    await bot.send_message(message.from_user.id, message.text)
-
-
 async def send_picture(message: types.Message):
     if message.reply_to_message:
         profile_pictures = await bot.get_user_profile_photos(message.reply_to_message.from_user.id)
