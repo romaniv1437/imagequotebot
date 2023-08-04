@@ -30,7 +30,7 @@ async def process_help_command(message: types.Message):
 
 
 async def send_picture(message: types.Message):
-    print(message)
+
     if message.reply_to_message:
 
         username = "©" + message.reply_to_message.from_user.username
