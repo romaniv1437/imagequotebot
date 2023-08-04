@@ -3,8 +3,16 @@
 
 ## Installing
 
- - Inside config.py paste yours credentials.
+ - Inside config.py paste yours credentials
 
  - Run pip install -r requirements.txt
 
  - Run python script.py
+
+## Usage
+
+ - add bot to group and make it admin
+   
+ - reply 'q' or 'Q' to text message in chat
+   
+ - wait for image
