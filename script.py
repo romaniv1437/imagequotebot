@@ -11,5 +11,6 @@ if __name__ == '__main__':
 
     # register handlers
     dp.register_message_handler(send_picture, lambda msg: msg, text='q')
+    dp.register_message_handler(send_picture, lambda msg: msg, text='Q')
 
     executor.start_polling(dp, on_startup=send_to_admin)
