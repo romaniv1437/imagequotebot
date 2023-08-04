@@ -1,6 +1,29 @@
 # imagequotebot
 Бот що зробить смішне повідомлення смішною картинкою
 
+
+ua
+## Встановлення
+
+ - В файлі config.py впишіть ваші дані
+
+ - Запустіть команду pip install -r requirements.txt
+
+ - Запустіть команду python script.py
+
+## Використання
+
+ - Добавте бота в групу та зробіть адміністратором
+   
+ - Відправте 'q' або 'Q' у відповідь на вибране повідомлення
+   
+ - Зачекайте на зображення
+
+## Приклад
+![image](https://github.com/romaniv1437/imagequotebot/assets/82290485/543bb7f6-1802-42b3-9089-f13de8d6bf2a)
+
+
+en
 ## Installing
 
  - Inside config.py paste yours credentials
