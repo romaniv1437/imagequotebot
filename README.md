@@ -18,5 +18,6 @@
  - wait for image
 
 ## Example
-![image](https://github.com/romaniv1437/imagequotebot/assets/82290485/e9fea2ad-5e62-41d5-83e4-dbc6e0b9db2b)
+![image](https://github.com/romaniv1437/imagequotebot/assets/82290485/d164a9c4-b80f-4385-bfe7-6bfe5e8f7a6c)
+
 
