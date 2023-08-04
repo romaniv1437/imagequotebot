@@ -16,3 +16,7 @@
  - reply 'q' or 'Q' to text message in chat
    
  - wait for image
+
+## Example
+![image](https://github.com/romaniv1437/imagequotebot/assets/82290485/e9fea2ad-5e62-41d5-83e4-dbc6e0b9db2b)
+
