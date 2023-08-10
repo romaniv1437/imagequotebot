@@ -5,7 +5,7 @@
 ua
 ## Встановлення
 
- - В файлі config.py впишіть ваші дані
+ - Створіть .evn файл і впишіть BOT_TOKEN=ВашТокен ADMIN_ID=ВашАдмінАйді
 
  - Запустіть команду pip install -r requirements.txt
 
@@ -26,7 +26,7 @@ ua
 en
 ## Installing
 
- - Inside config.py paste yours credentials
+ - Create a .evn file and enter BOT_TOKEN=YourToken ADMIN_ID=YourAdminID
 
  - Run pip install -r requirements.txt
 
